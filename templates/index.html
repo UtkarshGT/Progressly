@@ -24,7 +24,7 @@
           <a class="navbar-item">Dashboard</a>
 
           {% if user.is_authenticated %}
-          <a id="logout-btn" class="navbar-item button m-3">Logout </a>
+          <a href="/accounts/logout/" class="navbar-item button m-3">Logout </a>
           {% else %}
           <a class="navbar-item button m-3" href="{% provider_login_url 'google' %}">Login</a>
           {% endif %}
