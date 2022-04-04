@@ -40,12 +40,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    # Third Party
     # allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     # allauth google
     'allauth.socialaccount.providers.google',
+
+    # Own
+    'dashboard',
 ]
 
 MIDDLEWARE = [
