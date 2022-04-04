@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if roadmaps %}
+<ul>
+    {% for roadmap in roadmaps %}
+    <li><a href="{% url 'roadmap' roadmap.id %}">{{ roadmap.title }} -- {{ roadmap.description }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No roadmaps available</p>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Roadmap Detail</h2>
+
+{% if roadmap %}
+    {{ roadmap }}
+    {% if roadmap.entity_set.all|length > 0 %}
+        {% for entity in roadmap.entity_set.all %}
+        <div>
+        <a target="_blank" href="{{ entity.entity_url }}">{{ entity.title }}</a>
+        </div>    
+        {% endfor %}
+    {% else %}
+    <div style="color: red;">
+        Nothing to see
+    </div>
+    {% endif %}
+{% endif %}
+
+{% endblock content %}
