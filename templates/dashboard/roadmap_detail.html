@@ -10,7 +10,8 @@
   <div class="hero-body">
     <p class="title is-4">Roadmap Details</p>
     <p class="title">{{ roadmap }}</p>
-    <p class="subtitle">Count: {{ roadmap.entity_set.all|length }}</p>
+    <p class="subtitle">{{ roadmap.description }}</p>
+    
     <a
       class="button is-warning is-light"
       href="{% url 'roadmap-edit' roadmap.id %}"
@@ -30,7 +31,10 @@
 </div>
 {% if roadmap.entity_set.all|length > 0 %} {% for entity in roadmap.entity_set.all %}
 <div class="mx-6 box">
-  <a class="button is-link is-light" target="_blank" href="{{ entity.entity_url }}"
+  <a
+    class="button is-link is-light"
+    target="_blank"
+    href="{{ entity.entity_url }}"
     >{{ entity.title }}</a
   >
 
@@ -44,6 +48,7 @@
     href="{% url 'entity-edit' entity.id %}"
     >Edit</a
   >
+  <!-- <a class="button is-primary is-light entity-btn">Mark-Complete</a> -->
 </div>
 {% endfor %} {% else %}
 <div class="mx-6 notification is-info">Nothing to see here</div>

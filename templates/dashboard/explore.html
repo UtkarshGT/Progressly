@@ -15,7 +15,7 @@
   <ul>
     {% for roadmap in roadmaps %}
     <li>
-      <div class="box">
+      <div class="box mx-4">
         <a href="{% url 'roadmap' roadmap.id %}">
           {{ roadmap.title }} -- {{ roadmap.description }}</a
         >
