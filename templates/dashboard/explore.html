@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<a href="{% url 'roadmap-create' %}">Create Roadmap</a>
+
 {% if roadmaps %}
 <ul>
     {% for roadmap in roadmaps %}

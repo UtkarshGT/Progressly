@@ -5,18 +5,24 @@
 <h2>Roadmap Detail</h2>
 
 {% if roadmap %}
-    {{ roadmap }}
+    {{ roadmap }}: {{ roadmap.entity_set.all|length }}
+    <a href="{% url 'roadmap-edit' roadmap.id %}">Edit Roadmap Details</a>
+    <a href="{% url 'roadmap-delete' roadmap.id %}">Delete Roadmap</a>
     {% if roadmap.entity_set.all|length > 0 %}
         {% for entity in roadmap.entity_set.all %}
         <div>
         <a target="_blank" href="{{ entity.entity_url }}">{{ entity.title }}</a>
-        </div>    
+        <a href="{% url 'entity-edit' entity.id %}">Edit</a>
+        <a href="{% url 'entity-delete' entity.id %}">Delete</a>
+        </div>
+        <hr>
         {% endfor %}
     {% else %}
     <div style="color: red;">
         Nothing to see
     </div>
     {% endif %}
+    <a href="{% url 'entity-create' %}">Add Source</a>
 {% endif %}
 
 {% endblock content %}
