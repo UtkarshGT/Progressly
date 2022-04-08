@@ -1,17 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
+<section class="hero">
+  <div class="hero-body">
+    <p class="title">Roadmaps</p>
+  </div>
+</section>
 
-<a href="{% url 'roadmap-create' %}">Create Roadmap</a>
+<div class="block">
+  <a class="ml-6 button" href="{% url 'roadmap-create' %}">Create Roadmap</a>
+</div>
 
 {% if roadmaps %}
-<ul>
+<div class="block">
+  <ul>
     {% for roadmap in roadmaps %}
-    <li><a href="{% url 'roadmap' roadmap.id %}">{{ roadmap.title }} -- {{ roadmap.description }}</a></li>
+    <li>
+      <div class="box">
+        <a href="{% url 'roadmap' roadmap.id %}">
+          {{ roadmap.title }} -- {{ roadmap.description }}</a
+        >
+      </div>
+    </li>
+
     {% endfor %}
-</ul>
+  </ul>
+</div>
 {% else %}
 <p>No roadmaps available</p>
-{% endif %}
-
-{% endblock content %}
+{% endif %} {% endblock content %}

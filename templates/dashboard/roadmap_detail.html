@@ -1,28 +1,50 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block head %}
+<style>
+  .entity-btn {
+    float: right;
+  }
+</style>
+{% endblock head %} {% block content %}
 
-{% block content %}
+<section class="hero">
+  <div class="hero-body">
+    <p class="title is-4">Roadmap Details</p>
+    <p class="title">{{ roadmap }}</p>
+    <p class="subtitle">Count: {{ roadmap.entity_set.all|length }}</p>
+    <a
+      class="button is-warning is-light"
+      href="{% url 'roadmap-edit' roadmap.id %}"
+      >Edit Roadmap Details</a
+    >
+    <a
+      class="button is-danger is-light"
+      href="{% url 'roadmap-delete' roadmap.id %}"
+      >Delete Roadmap</a
+    >
+  </div>
+</section>
+<div class="block">
+  <a class="ml-6 button is-primary is-light" href="{% url 'entity-create' %}"
+    >Add Source</a
+  >
+</div>
+{% if roadmap.entity_set.all|length > 0 %} {% for entity in roadmap.entity_set.all %}
+<div class="mx-6 box">
+  <a class="button is-link is-light" target="_blank" href="{{ entity.entity_url }}"
+    >{{ entity.title }}</a
+  >
 
-<h2>Roadmap Detail</h2>
-
-{% if roadmap %}
-    {{ roadmap }}: {{ roadmap.entity_set.all|length }}
-    <a href="{% url 'roadmap-edit' roadmap.id %}">Edit Roadmap Details</a>
-    <a href="{% url 'roadmap-delete' roadmap.id %}">Delete Roadmap</a>
-    {% if roadmap.entity_set.all|length > 0 %}
-        {% for entity in roadmap.entity_set.all %}
-        <div>
-        <a target="_blank" href="{{ entity.entity_url }}">{{ entity.title }}</a>
-        <a href="{% url 'entity-edit' entity.id %}">Edit</a>
-        <a href="{% url 'entity-delete' entity.id %}">Delete</a>
-        </div>
-        <hr>
-        {% endfor %}
-    {% else %}
-    <div style="color: red;">
-        Nothing to see
-    </div>
-    {% endif %}
-    <a href="{% url 'entity-create' %}">Add Source</a>
-{% endif %}
-
-{% endblock content %}
+  <a
+    class="button is-danger is-light entity-btn"
+    href="{% url 'entity-delete' entity.id %}"
+    >Delete</a
+  >
+  <a
+    class="button is-warning is-light entity-btn"
+    href="{% url 'entity-edit' entity.id %}"
+    >Edit</a
+  >
+</div>
+{% endfor %} {% else %}
+<div class="mx-6 notification is-info">Nothing to see here</div>
+{% endif %} {% endblock content %}

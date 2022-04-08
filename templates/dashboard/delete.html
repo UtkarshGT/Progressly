@@ -2,12 +2,18 @@
 
 {% block content %}
 
+<section class="hero">
+    <div class="hero-body">
+      <p class="title">
+        Are you sure you want to delete "{{obj}}"?
+      </p>
+    </div>
+  </section>
+
 <form method="POST" action="">
     {% csrf_token %}
-    <p>Are you sure you want to delete "{{obj}}"?</p>
-
-    <a href="{{request.META.HTTP_REFERER}}">Go Back</a>
-    <input type="submit" value="Confirm" />
+    <a class="ml-6 button is-info is-light" href="{{request.META.HTTP_REFERER}}">Go Back</a>
+    <input class="button is-danger is-light" type="submit" value="Confirm" />
 </form>
 
 {% endblock content %}
