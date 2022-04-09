@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-body">
+    <p class="title">
+    {% if process == "connect" %}
+    {% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}
+    
+    {% blocktrans with provider.name as provider %}You are about to connect a new third party account from {{ provider }}.{% endblocktrans %}
+    {% else %}
+    {% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}
+  </p>
+  <p class="subtitle">
+    {% blocktrans with provider.name as provider %}You are about to sign in using a third party account from {{ provider }}.{% endblocktrans %}
+  </p>
+    {% endif %}
+  
+  </div>
+</section>
+
+<form method="post">
+  {% csrf_token %}
+  <button class="ml-6 button is-success is-outlined is-light" type="submit">{% trans "Continue Login" %}</button>
+</form>
+{% endblock content %}
