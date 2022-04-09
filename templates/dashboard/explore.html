@@ -10,6 +10,17 @@
   <a class="ml-6 button" href="{% url 'roadmap-create' %}">Create Roadmap</a>
 </div>
 
+<form method="GET" action="{% url 'explore' %}">
+  <div class="ml-6 field has-addons">
+    <div class="control">
+      <input class="input" type="text" name="q" placeholder="Find a Roadmap" />
+    </div>
+    <div class="control">
+      <button class="button is-info" type="submit">Search</button>
+    </div>
+  </div>
+</form>
+
 {% if roadmaps %}
 <div class="block">
   <ul>

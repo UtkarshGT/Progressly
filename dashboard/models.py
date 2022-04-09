@@ -1,6 +1,4 @@
-from configparser import MAX_INTERPOLATION_DEPTH
 from django.db import models
-
 
 class Roadmap(models.Model):
     title = models.CharField(max_length=200)

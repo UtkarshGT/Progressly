@@ -1,12 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
 
 from .forms import EntityForm, RoadmapForm
 from dashboard.models import Entity, Roadmap
 
 
 def explore(request):
-    roadmaps = Roadmap.objects.all()[:10]
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    roadmaps = Roadmap.objects.filter(title__icontains=q)
     context = {
         'roadmaps': roadmaps,
     }
@@ -23,6 +25,7 @@ def roadmap_detail(request, pk):
 # Create
 
 
+@login_required(login_url="/accounts/google/login")
 def roadmap_form(request):
     form = RoadmapForm()
     if request.method == 'POST':
@@ -35,6 +38,7 @@ def roadmap_form(request):
     return render(request, 'dashboard/roadmap_form.html', context)
 
 
+@login_required(login_url="/accounts/google/login")
 def roadmap_update(request, pk):
     roadmap = Roadmap.objects.get(id=pk)
     form = RoadmapForm(instance=roadmap)
@@ -51,6 +55,7 @@ def roadmap_update(request, pk):
     return render(request, 'dashboard/roadmap_form.html', context)
 
 
+@login_required(login_url="/accounts/google/login")
 def roadmap_delete(request, pk):
     roadmap = Roadmap.objects.get(id=pk)
     if request.method == 'POST':
@@ -58,9 +63,9 @@ def roadmap_delete(request, pk):
         return redirect('explore')
     return render(request, 'dashboard/delete.html', {'obj': roadmap})
 
+
 # Create
-
-
+@login_required(login_url="/accounts/google/login")
 def entity_form(request):
     form = EntityForm()
     if request.method == 'POST':
@@ -73,6 +78,7 @@ def entity_form(request):
     return render(request, 'dashboard/roadmap_form.html', context)
 
 
+@login_required(login_url="/accounts/google/login")
 def entity_update(request, pk):
     entity = Entity.objects.get(id=pk)
     form = EntityForm(instance=entity)
@@ -87,6 +93,7 @@ def entity_update(request, pk):
     return render(request, 'dashboard/roadmap_form.html', context)
 
 
+@login_required(login_url="/accounts/google/login")
 def entity_delete(request, pk):
     entity = Entity.objects.get(id=pk)
     if request.method == 'POST':
