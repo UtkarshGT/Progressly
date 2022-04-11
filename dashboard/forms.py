@@ -11,4 +11,4 @@ class RoadmapForm(ModelForm):
 class EntityForm(ModelForm):
     class Meta:
         model = Entity
-        fields = "__all__"
+        fields = ['title','entity_url']
