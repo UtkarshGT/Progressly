@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from .forms import EntityForm, RoadmapForm
 from dashboard.models import Entity, Roadmap
@@ -117,5 +118,5 @@ def entity_delete(request, pk):
         if request.user != entity.roadmap.user:
             return HttpResponse("Not valid")
         entity.delete()
-        return redirect('explore')
+        return redirect(reverse('roadmap', args=[entity.roadmap.id]))
     return render(request, 'dashboard/delete.html', {'obj': entity})

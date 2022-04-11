@@ -13,7 +13,7 @@ class Roadmap(models.Model):
 class Entity(models.Model):
     roadmap = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    entity_url = models.TextField()
+    entity_url = models.URLField(max_length=300)
 
     def __str__(self) -> str:
         return self.title
