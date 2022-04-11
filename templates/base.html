@@ -31,7 +31,7 @@
           <a href="{% url 'explore' %}" class="navbar-item">Explore</a>
 
           {% if user.is_authenticated %}
-          <a href="/accounts/logout/" class="navbar-item button m-3">Logout {{ user.email }}</a>
+          <a href="/accounts/logout/" class="navbar-item button m-3">Logout {{ user.first_name }}</a>
           {% else %}
           <a class="navbar-item button m-3" href="{% provider_login_url 'google' %}">Login</a>
           {% endif %}
