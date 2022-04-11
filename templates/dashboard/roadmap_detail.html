@@ -10,26 +10,31 @@
   <div class="hero-body">
     <p class="title is-4">Roadmap Details</p>
     <p class="title">{{ roadmap }}</p>
-    <p class="subtitle">{{ roadmap.description }}</p>
-    
-    <a
-      class="button is-warning is-light"
-      href="{% url 'roadmap-edit' roadmap.id %}"
-      >Edit Roadmap Details</a
-    >
-    <a
-      class="button is-danger is-light"
-      href="{% url 'roadmap-delete' roadmap.id %}"
-      >Delete Roadmap</a
-    >
+    <p class="subtitle">{{ roadmap.description }}, {{ user.id }}</p>
+
+    {% if user == roadmap.user %}
+    <div>
+      <a
+        class="button is-warning is-light"
+        href="{% url 'roadmap-edit' roadmap.id %}"
+        >Edit Roadmap Details</a
+      >
+      <a
+        class="button is-danger is-light"
+        href="{% url 'roadmap-delete' roadmap.id %}"
+        >Delete Roadmap</a
+      >
+    </div>
+    {% endif %}
   </div>
 </section>
+{% if user == roadmap.user %}
 <div class="block">
   <a class="ml-6 button is-primary is-light" href="{% url 'entity-create' %}"
     >Add Source</a
   >
 </div>
-{% if roadmap.entity_set.all|length > 0 %} {% for entity in roadmap.entity_set.all %}
+{% endif %} {% if roadmap.entity_set.all|length > 0 %} {% for entity in roadmap.entity_set.all %}
 <div class="mx-6 box">
   <a
     class="button is-link is-light"
@@ -37,7 +42,7 @@
     href="{{ entity.entity_url }}"
     >{{ entity.title }}</a
   >
-
+  {% if user == roadmap.user %}
   <a
     class="button is-danger is-light entity-btn"
     href="{% url 'entity-delete' entity.id %}"
@@ -48,6 +53,7 @@
     href="{% url 'entity-edit' entity.id %}"
     >Edit</a
   >
+  {% endif %}
   <!-- <a class="button is-primary is-light entity-btn">Mark-Complete</a> -->
 </div>
 {% endfor %} {% else %}
