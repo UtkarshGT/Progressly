@@ -9,8 +9,8 @@
 <section class="hero">
   <div class="hero-body">
     <p class="title is-4">Roadmap Details</p>
-    <p class="title">{{ roadmap }}</p>
-    <p class="subtitle">{{ roadmap.description }}, {{ user.id }}</p>
+    <p class="title" id="status">{{ roadmap }}</p>
+    <p class="subtitle">{{ roadmap.description }}</p>
 
     {% if user == roadmap.user %}
     <div>
@@ -25,17 +25,25 @@
         >Delete Roadmap</a
       >
     </div>
+    {% else %}
+    <a
+        class="button is-warning is-light"
+        href="{% url 'import-roadmap' roadmap.id %}"
+        >Import Roadmap</a
+      >
     {% endif %}
   </div>
 </section>
 {% if user == roadmap.user %}
 <div class="block">
-  <a class="ml-6 button is-primary is-light" href="{% url 'entity-create' %}"
+  <a
+    class="ml-6 button is-primary is-light"
+    href="{% url 'entity-create' roadmap.id %}"
     >Add Source</a
   >
 </div>
 {% endif %} {% if roadmap.entity_set.all|length > 0 %} {% for entity in roadmap.entity_set.all %}
-<div class="mx-6 box">
+<div class='mx-6 box {{ entity.is_completed|yesno:"complete,incomplete" }}'>
   <a
     class="button is-link is-light"
     target="_blank"
@@ -53,9 +61,22 @@
     href="{% url 'entity-edit' entity.id %}"
     >Edit</a
   >
+  <a
+    class="button is-light entity-btn"
+    href="{% url 'entity-toggle' entity.id %}"
+  >
+    {% if entity.is_completed == True %} Mark Incomplete {% else %} Mark
+    Complete {% endif %}
+  </a>
   {% endif %}
-  <!-- <a class="button is-primary is-light entity-btn">Mark-Complete</a> -->
 </div>
 {% endfor %} {% else %}
 <div class="mx-6 notification is-info">Nothing to see here</div>
-{% endif %} {% endblock content %}
+{% endif %} {% endblock content %} {% block js %} {% if user == roadmap.user %}
+<script>
+  var n_complete = document.getElementsByClassName("complete").length;
+  var n_incomplete = document.getElementsByClassName("incomplete").length;
+  var element = document.getElementById("status");
+  element.innerHTML += " " + n_complete + "/" + (n_complete + n_incomplete);
+</script>
+{% endif %} {% endblock js %}

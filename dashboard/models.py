@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import DEFAULT_DB_ALIAS, models
 from django.contrib.auth.models import User
 
 class Roadmap(models.Model):
@@ -6,6 +6,7 @@ class Roadmap(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    is_public = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return self.title
@@ -14,6 +15,7 @@ class Entity(models.Model):
     roadmap = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     entity_url = models.URLField(max_length=300)
+    is_completed = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return self.title

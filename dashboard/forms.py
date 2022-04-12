@@ -5,7 +5,7 @@ from .models import Entity, Roadmap
 class RoadmapForm(ModelForm):
     class Meta:
         model = Roadmap
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'is_public']
 
 
 class EntityForm(ModelForm):
