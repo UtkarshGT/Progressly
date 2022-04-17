@@ -30,10 +30,12 @@ def roadmap_detail(request, pk):
 def roadmap_form(request):
     form = RoadmapForm()
     if request.method == 'POST':
+        print(request.POST)
         Roadmap.objects.create(
             user=request.user,
             title=request.POST.get('title'),
-            description=request.POST.get('description')
+            description=True if request.POST.get(
+                'description') == 'on' else False,
         )
 
         return redirect('explore')

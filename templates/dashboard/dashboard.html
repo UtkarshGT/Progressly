@@ -35,8 +35,10 @@
     <li>
       <div class="box">
         <a href="{% url 'roadmap' roadmap.id %}">
-          <strong>{{ roadmap.title }}</strong> -- {{ roadmap.description }}</a
+          <strong>{{ roadmap.title }}</strong></a
         >
+        <br />
+        {{ roadmap.description }}
       </div>
     </li>
 
