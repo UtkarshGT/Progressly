@@ -23,3 +23,5 @@ urlpatterns = [
     path('explore/', include('dashboard.urls')),
     path('', TemplateView.as_view(template_name='index.html'), name='index')
 ]
+
+handler404 = 'dashboard.views.error_404'

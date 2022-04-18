@@ -155,3 +155,7 @@ def import_roadmap(request, pk):
             is_completed=False,
         )
     return redirect('dashboard')
+
+
+def error_404(request, exception):
+    return render(request, 'dashboard/404.html', {})
