@@ -1,3 +1,4 @@
+from pydoc import describe
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
@@ -34,8 +35,10 @@ def roadmap_form(request):
         Roadmap.objects.create(
             user=request.user,
             title=request.POST.get('title'),
-            description=True if request.POST.get(
-                'description') == 'on' else False,
+            description=request.POST.get('description'),
+            is_public=True if request.POST.get(
+                'is_public') == 'on' else False,
+
         )
 
         return redirect('explore')
