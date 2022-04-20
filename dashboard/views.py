@@ -31,7 +31,6 @@ def roadmap_detail(request, pk):
 def roadmap_form(request):
     form = RoadmapForm()
     if request.method == 'POST':
-        print(request.POST)
         Roadmap.objects.create(
             user=request.user,
             title=request.POST.get('title'),
