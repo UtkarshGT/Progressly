@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+
+<section class="hero">
+  <div class="hero-body">
+    <p class="title">Institution</p>
+    <p class="subtitle">
+      {% if user.is_institution %} Institute User {% else %} Normal User {% endif %}
+    </p>
+  </div>
+</section>
+
+{% if user.is_institution %}
+<div class="block">
+  <a class="button" href="{% url 'roadmap-create' %}">Create Roadmap</a>
+</div>
+{% endif %}
+
+
+
+{% endblock content %}

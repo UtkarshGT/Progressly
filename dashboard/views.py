@@ -1,4 +1,3 @@
-from pydoc import describe
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
@@ -81,7 +80,7 @@ def roadmap_delete(request, pk):
 def dashboard(request):
     roadmaps = Roadmap.objects.filter(user=request.user)
     context = {'roadmaps': roadmaps}
-    return render(request, 'dashboard/dashboard.html', context)
+    return render(request, 'dashboard/explore.html', context)
 
 
 # Create
