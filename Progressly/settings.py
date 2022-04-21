@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     # Own
     'dashboard',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -147,6 +148,9 @@ OCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
