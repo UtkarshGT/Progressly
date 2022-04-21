@@ -1,8 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
 from dashboard.models import Roadmap
+from users.models import CustomUser as User
+from institution.forms import InstituteForm
 
 
 @login_required(login_url="/accounts/google/login")
@@ -38,3 +41,20 @@ def roadmap_detail(request, pk):
         'roadmap': roadmap
     }
     return render(request, 'institution/roadmap_detail.html', context)
+
+
+@login_required(login_url="/accounts/google/login")
+def form_institute(request):
+    form = InstituteForm()
+    if request.method == 'POST':
+        form = InstituteForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['token'] == "12345":
+                user = User.objects.get(id=request.user.id)
+                user.is_institution = True
+                user.save()
+                return redirect(reverse('institution'))
+
+            else:
+                return HttpResponse("Invalid Token")
+    return render(request, 'institution/form_institute.html', {'form': form})

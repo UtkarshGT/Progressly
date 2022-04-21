@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="field has-addons section is-medium"> 
+  <form action="" method="post">
+    {% csrf_token %} {{form.as_p}}
+    <input class="ml-6 button" type="submit" value="Submit" />
+  </form>
+</div>
+
+
+{% endblock content %}

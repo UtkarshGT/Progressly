@@ -15,6 +15,9 @@
   <a class="button" href="{% url 'roadmap-create' %}">Create Roadmap</a>
 </div>
 {% else %}
+<div class="block">
+  <a class="button is-warning is-light" href="{% url 'inst_form' %}">Convert to Institute Account</a>
+</div>
 <div class="my-4">
   <form method="GET" action="{% url 'follow' %}">
     <div class="field has-addons">
