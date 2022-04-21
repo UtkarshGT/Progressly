@@ -4,4 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='institution'),
+    path('<int:pk>/', views.roadmap_detail, name='inst_detail'),
+    path('follow/', views.follow_roadmap, name='follow'),
+    path('unfollow/<int:pk>/', views.unfollow_roadmap, name='unfollow'),
 ]

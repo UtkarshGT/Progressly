@@ -7,6 +7,7 @@ class Roadmap(models.Model):
     description = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     is_public = models.BooleanField(default=False)
+    followers = models.ManyToManyField(User, related_name='follows')
 
     def __str__(self) -> str:
         return self.title

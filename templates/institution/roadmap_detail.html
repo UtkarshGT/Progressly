@@ -8,7 +8,7 @@
 
 <section class="hero">
   <div class="hero-body">
-    <p class="title is-4">Roadmap Details</p>
+    <p class="title is-4">Roadmap ID: {{ roadmap.id }}</p>
     <p class="title" id="{% if user.is_institution %}inst{% else %}status{% endif %}">{{ roadmap }}</p>
     <p class="subtitle">{{ roadmap.description }}</p>
 
@@ -27,9 +27,9 @@
     </div>
     {% else %}
     <a
-        class="button is-warning is-light"
-        href="{% url 'import-roadmap' roadmap.id %}"
-        >Import Roadmap</a
+        class="button is-danger is-light"
+        href="{% url 'unfollow' roadmap.id %}"
+        >Unfollow</a
       >
     {% endif %}
   </div>

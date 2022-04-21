@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 
 <section class="hero">
   <div class="hero-body">
@@ -13,8 +14,47 @@
 <div class="block">
   <a class="button" href="{% url 'roadmap-create' %}">Create Roadmap</a>
 </div>
+{% else %}
+<div class="my-4">
+  <form method="GET" action="{% url 'follow' %}">
+    <div class="field has-addons">
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          name="q"
+          placeholder="Enter ID"
+        />
+      </div>
+      <div class="control">
+        <button class="button is-info" type="submit">Follow</button>
+      </div>
+    </div>
+  </form>
+</div>
 {% endif %}
 
+
+{% if roadmaps %}
+<div class="block">
+  <ul>
+    {% for roadmap in roadmaps %}
+    <li>
+      <div class="box">
+        <a href="{% url 'inst_detail' roadmap.id %}">
+          <strong>{{ roadmap.title }}</strong></a
+        >
+        <br>
+        {{ roadmap.description }}
+      </div>
+    </li>
+
+    {% endfor %}
+  </ul>
+</div>
+{% else %}
+<p>No roadmaps available</p>
+{% endif %}
 
 
 {% endblock content %}
