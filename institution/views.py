@@ -64,6 +64,5 @@ def form_institute(request):
 @login_required(login_url="/accounts/google/login")
 def followers(request, pk):
     roadmap = get_object_or_404(Roadmap, id=pk, user=request.user)
-    print(roadmap)
     followers = roadmap.followers.all()
     return render(request, 'institution/followers.html', {'followers': followers, 'roadmap': roadmap})
