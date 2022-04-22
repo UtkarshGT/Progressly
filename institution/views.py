@@ -26,6 +26,7 @@ def follow_roadmap(request):
     user.follows.add(roadmap)
     return redirect(reverse('institution'))
 
+
 @login_required(login_url="/accounts/google/login")
 def unfollow_roadmap(request, pk):
     roadmap = Roadmap.objects.get(id=pk)
@@ -58,3 +59,11 @@ def form_institute(request):
             else:
                 return HttpResponse("Invalid Token")
     return render(request, 'institution/form_institute.html', {'form': form})
+
+
+@login_required(login_url="/accounts/google/login")
+def followers(request, pk):
+    roadmap = get_object_or_404(Roadmap, id=pk, user=request.user)
+    print(roadmap)
+    followers = roadmap.followers.all()
+    return render(request, 'institution/followers.html', {'followers': followers, 'roadmap': roadmap})

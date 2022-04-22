@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+
+<section class="hero">
+  <div class="hero-body">
+    <p class="title">{{ roadmap.title }}</p>
+    <p class="subtitle">followers</p>
+  </div>
+</section>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sr No</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in followers %}
+
+    <tr>
+      <th>{{ forloop.counter }}</th>
+
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
