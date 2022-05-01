@@ -66,13 +66,6 @@
     href="{% url 'entity-edit' entity.id %}"
     >Edit</a
   >
-  <a
-    class="button is-light entity-btn"
-    href="{% url 'entity-toggle' entity.id %}"
-  >
-    {% if entity.is_completed == True %} Mark Incomplete {% else %} Mark
-    Complete {% endif %}
-  </a>
   {% endif %}
 </div>
 {% endfor %} {% else %}
