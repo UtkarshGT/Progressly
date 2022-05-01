@@ -25,4 +25,8 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='index')
 ]
 
+admin.site.site_header = "Progressly Admin"
+admin.site.site_title = "Progressly Admin Portal"
+admin.site.index_title = "Progressly Portal"
+
 handler404 = 'dashboard.views.error_404'
