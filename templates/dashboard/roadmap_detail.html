@@ -43,32 +43,35 @@
   >
 </div>
 {% endif %} {% if roadmap.entity_set.all|length > 0 %} {% for entity in roadmap.entity_set.all %}
-<div class='mx-6 box {{ entity.is_completed|yesno:"complete,incomplete" }}'>
+<div class='mx-6 box roadmap-element {{ entity.is_completed|yesno:"complete,incomplete" }} ' style="display: flex; justify-content: space-between;">
   <a
     class="button is-link is-light"
     target="_blank"
     href="{{ entity.entity_url }}"
+    style="white-space: initial; height: auto;"
     >{{ entity.title }}</a
   >
   {% if user == roadmap.user %}
-  <a
-    class="button is-danger is-light entity-btn"
-    href="{% url 'entity-delete' entity.id %}"
-    >Delete</a
-  >
-  <a
-    class="button is-warning is-light entity-btn"
-    href="{% url 'entity-edit' entity.id %}"
-    >Edit</a
-  >
-  <a
-    class="button is-light entity-btn"
-    href="{% url 'entity-toggle' entity.id %}"
-  >
+  <div >
+    <a
+      class="button is-danger is-light "
+      href="{% url 'entity-delete' entity.id %}"
+      >Delete</a
+    >
+    <a
+      class="button is-warning is-light "
+      href="{% url 'entity-edit' entity.id %}"
+      >Edit</a
+    >
+    <a
+      class="button is-light "
+      href="{% url 'entity-toggle' entity.id %}"
+    >
     {% if entity.is_completed == True %} Mark Incomplete {% else %} Mark
     Complete {% endif %}
   </a>
-  {% endif %}
+</div>
+{% endif %}
 </div>
 {% endfor %} {% else %}
 <div class="mx-6 notification is-info">Nothing to see here</div>
